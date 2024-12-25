@@ -22,7 +22,7 @@ public class UserServlet extends HttpServlet { //ERROR=null
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = User.builder()
-                .username("mobina")
+                .username("aa")
                 .password("1234")
                 .build();
         userService.save(user);
