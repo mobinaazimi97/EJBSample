@@ -2,7 +2,8 @@ package com.mftplus.jee11.model.controller.servlet;
 
 import com.mftplus.jee11.model.entity.User;
 import com.mftplus.jee11.model.service.UserService;
-import jakarta.inject.Inject;
+import jakarta.ejb.AccessTimeout;
+import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,10 +15,12 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/user")
 @Slf4j
-public class UserServlet extends HttpServlet { //ERROR=null
-
-    @Inject
+public class UserServlet extends HttpServlet {
+    @EJB
     private UserService userService;
+
+//    @Inject
+//    private UserService userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,10 +29,11 @@ public class UserServlet extends HttpServlet { //ERROR=null
                 .password("1234")
                 .build();
         userService.save(user);
+        //Admin 1 - Edit
         User userFound1 = userService.findById(1L);
         userFound1.setPassword("4444");
         userService.update(userFound1);
-
+        //Admin 2 - Edit
         User userFound2 = userService.findById(1L);
         userService.update(userFound2);
     }
